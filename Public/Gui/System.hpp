@@ -8,13 +8,7 @@ namespace Library::Gui
     class RenderSystem
     {
     public:
-        RenderSystem(Widget* target);
-        Widget* target();
-
-        void render();
-
-    private:
-        Widget* _target = nullptr;
+        void render(Widget* w);
     };
 
     class FocusSystem

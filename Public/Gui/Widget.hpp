@@ -14,8 +14,6 @@ namespace Library::Gui
         Widget();
         virtual ~Widget();
 
-        virtual void render() = 0;
-
         Widget* parent() const noexcept;
 
         void addChild(std::unique_ptr<Widget> child);

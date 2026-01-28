@@ -4,17 +4,13 @@
 #include "Gui/Widget.hpp"
 
 namespace Library::Gui
-{
-    RenderSystem::RenderSystem(Widget* target) : _target(target) {}
-
-    Widget* RenderSystem::target()
+{   
+    void RenderSystem::render(Widget* w)
     {
-        return _target;
-    }
-    
-    void RenderSystem::render()
-    {
-        _target->render();
+        if(IRenderable* r = dynamic_cast<IRenderable*>(w))
+        {
+            r->onRender();
+        }
     }
 
     void FocusSystem::focus(Widget* w)
