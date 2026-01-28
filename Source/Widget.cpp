@@ -13,11 +13,16 @@ namespace Library::Gui
             layout = (p->layout);
         }
     }
+    
     Widget::~Widget() = default;
 
     Widget* Widget::parent() const noexcept
     {
-        return node.parent()->owner();
+        if(Node<Widget>* p = node.parent())
+        {
+            return p->owner();
+        }
+        return nullptr;
     }
 
     void Widget::addChild(std::unique_ptr<Widget> child)
@@ -33,12 +38,20 @@ namespace Library::Gui
 
     Widget* Widget::previous() const noexcept
     {
-        return node.previous()->owner();
+        if(Node<Widget>* n = node.previous())
+        {
+            return n->owner();
+        }
+        return nullptr;
     }
 
     Widget* Widget::next() const noexcept
     {
-        return node.next()->owner();
+        if(Node<Widget>* n = node.next())
+        {
+            return n->owner();
+        }
+        return nullptr;
     }
 
     void Widget::setAlignment(HorizontalAlignment horizontal, VerticalAlignment vertical)
