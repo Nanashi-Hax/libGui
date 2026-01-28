@@ -16,7 +16,7 @@ namespace Library::Gui
 
         Widget* parent() const noexcept;
 
-        void addChild(std::unique_ptr<Widget> child);
+        Widget* addChild(std::unique_ptr<Widget> child);
         void removeChild(size_t index);
 
         Widget* previous() const noexcept;
