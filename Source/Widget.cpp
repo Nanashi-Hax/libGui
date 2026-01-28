@@ -24,14 +24,6 @@ namespace Library::Gui
         }
         return nullptr;
     }
-
-    Widget* Widget::addChild(std::unique_ptr<Widget> child)
-    {
-        Widget* raw = child.get();
-        node.addChild(&child->node);
-        children.push_back(std::move(child));
-        return raw;
-    }
     
     void Widget::removeChild(size_t index)
     {

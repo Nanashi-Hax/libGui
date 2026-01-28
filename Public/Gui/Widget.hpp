@@ -16,7 +16,8 @@ namespace Library::Gui
 
         Widget* parent() const noexcept;
 
-        Widget* addChild(std::unique_ptr<Widget> child);
+        template<class T>
+        T* addChild(std::unique_ptr<T> child);
         void removeChild(size_t index);
 
         Widget* previous() const noexcept;
@@ -33,3 +34,5 @@ namespace Library::Gui
         std::vector<std::unique_ptr<Widget>> children;
     };
 }
+
+#include "Gui/Impl/Widget.ipp"
