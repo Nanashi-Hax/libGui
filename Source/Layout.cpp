@@ -4,7 +4,16 @@
 
 namespace Library::Gui
 {
-    Layout::Layout(Layout* parent) : _parent(parent) {}
+    Layout::Layout() : _parent(nullptr) {}
+
+    Layout::Layout(Layout* parent) : _parent(parent)
+    {
+        if(parent)
+        {
+            Math::Rectangle rect = _parent->rectangle();
+            _sizeHint = SizeHint(16.0f, 16.0f, rect.width, rect.height);
+        }
+    }
 
     Math::Rectangle Layout::rectangle()
     {
@@ -16,7 +25,7 @@ namespace Library::Gui
         }
         else
         {
-            r = Math::Rectangle{0,0,_sizeHint.preferredSize.x,_sizeHint.preferredSize.y};
+            r = Math::Rectangle{0,0,_sizeHint.preferredWidth,_sizeHint.preferredHeight};
         }
 
         r.x += _margin.left;
@@ -24,8 +33,8 @@ namespace Library::Gui
         r.width -= (_margin.left + _margin.right);
         r.height -= (_margin.top + _margin.bottom);
 
-        float w = std::max(_sizeHint.minSize.x, std::min(r.width, _sizeHint.preferredSize.x));
-        float h = std::max(_sizeHint.minSize.y, std::min(r.height, _sizeHint.preferredSize.y));
+        float w = std::max(_sizeHint.minWidth, std::min(r.width, _sizeHint.preferredWidth));
+        float h = std::max(_sizeHint.minHeight, std::min(r.height, _sizeHint.preferredHeight));
         r.width = w;
         r.height = h;
 
@@ -54,12 +63,14 @@ namespace Library::Gui
 
     void Layout::setMinSize(float width, float height)
     {
-        _sizeHint.minSize = Math::Vector2(width, height);
+        _sizeHint.minWidth = width;
+        _sizeHint.minHeight = height;
     }
 
     void Layout::setPreferredSize(float width, float height)
     {
-        _sizeHint.preferredSize = Math::Vector2(width, height);
+        _sizeHint.preferredWidth = width;
+        _sizeHint.preferredHeight = height;
     }
 
     void Layout::setMargin(float left, float top, float right, float bottom)

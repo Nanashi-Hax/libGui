@@ -5,7 +5,14 @@
 
 namespace Library::Gui
 {
-    Widget::Widget() : node(this), layout(this->parent()->layout) {}
+    Widget::Widget() : node(this)
+    {
+        Widget* p = parent();
+        if(p)
+        {
+            layout = (p->layout);
+        }
+    }
     Widget::~Widget() = default;
 
     Widget* Widget::parent() const noexcept
@@ -32,5 +39,25 @@ namespace Library::Gui
     Widget* Widget::next() const noexcept
     {
         return node.next()->owner();
+    }
+
+    void Widget::setAlignment(HorizontalAlignment horizontal, VerticalAlignment vertical)
+    {
+        layout.setAlignment(horizontal, vertical);
+    }
+
+    void Widget::setMinSize(float width, float height)
+    {
+        layout.setMinSize(width, height);
+    }
+
+    void Widget::setPreferredSize(float width, float height)
+    {
+        layout.setPreferredSize(width, height);
+    }
+
+    void Widget::setMargin(float left, float top, float right, float bottom)
+    {
+        layout.setMargin(left, top, right, bottom);
     }
 }

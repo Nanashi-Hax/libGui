@@ -20,8 +20,16 @@ namespace Library::Gui
 
     struct SizeHint
     {
-        Math::Vector2 minSize;
-        Math::Vector2 preferredSize;
+        SizeHint() : minWidth(0.0f), minHeight(0.0f), preferredWidth(0.0f), preferredHeight(0.0f) {}
+
+        SizeHint(float minWidth, float minHeight, float preferredWidth, float preferredHeight)
+        :
+        minWidth(minWidth), minHeight(minHeight), preferredWidth(preferredWidth), preferredHeight(preferredHeight) {}
+
+        float minWidth;
+        float minHeight;
+        float preferredWidth;
+        float preferredHeight;
     };
 
     struct Margin
@@ -35,6 +43,7 @@ namespace Library::Gui
     class Layout
     {
     public:
+        Layout();
         explicit Layout(Layout* parent);
 
         Math::Rectangle rectangle();
@@ -47,8 +56,8 @@ namespace Library::Gui
     private:
         Layout* _parent;
 
-        HorizontalAlignment _hAlign = HorizontalAlignment::Left;
-        VerticalAlignment _vAlign = VerticalAlignment::Up;
+        HorizontalAlignment _hAlign = HorizontalAlignment::Center;
+        VerticalAlignment _vAlign = VerticalAlignment::Middle;
         SizeHint _sizeHint;
         Margin _margin;
     };

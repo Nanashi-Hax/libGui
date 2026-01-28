@@ -31,7 +31,7 @@ MachineDependent := -DESPRESSO -mcpu=750 -meabi -mhard-float
 #-------------------------------------------------------------------------------
 TopDir := $(CURDIR)
 
-Target := libException
+Target := libGui
 
 SourceDir := $(TopDir)/Source
 IncludeDir := $(TopDir)/Include $(TopDir)/Public
