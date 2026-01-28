@@ -1,1 +1,5 @@
-# libGui-Core
+# API
+
+```cpp
+#include <Gui.hpp>
+```
