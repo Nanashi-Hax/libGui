@@ -8,6 +8,7 @@ namespace Library::Gui
     {
     public:
         Core();
+        virtual ~Core() = default;
         virtual void update() = 0;
         virtual void render() = 0;
 
