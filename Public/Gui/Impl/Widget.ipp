@@ -4,7 +4,7 @@
 
 namespace Library::Gui
 {
-    template <typename T>
+    template <class T>
     T* Widget::addChild(std::unique_ptr<T> child)
     {
         static_assert(std::is_base_of_v<Widget, T>);

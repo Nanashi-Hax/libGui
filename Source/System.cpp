@@ -1,14 +1,18 @@
 #include "Gui/System.hpp"
-#include "Gui/Interface.hpp"
 #include "Gui/Widget.hpp"
 
 namespace Library::Gui
 {   
-    void RenderSystem::render(Widget* w)
+    void RenderSystem::render()
+    {
+        if (!_root) return;
+        renderRecursive(_root);
+    }
+
+    void RenderSystem::renderRecursive(Widget* w)
     {
         if (auto r = w->renderable()) r->onRender();
-
-        for (auto& c : w->children()) render(c.get());
+        for (auto& c : w->children()) renderRecursive(c.get());
     }
 
     void FocusSystem::focus(Widget* target)

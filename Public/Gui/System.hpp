@@ -1,6 +1,5 @@
 #pragma once
 
-#include "Gui/Interface.hpp"
 #include "Gui/Widget.hpp"
 
 namespace Library::Gui
@@ -8,7 +7,14 @@ namespace Library::Gui
     class RenderSystem
     {
     public:
-        void render(Widget* root);
+        void render();
+
+        void setRoot(Widget* root);
+
+    private:
+        void renderRecursive(Widget* root);
+        
+        Widget* _root = nullptr;
     };
 
     class FocusSystem
