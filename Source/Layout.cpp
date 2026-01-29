@@ -15,6 +15,11 @@ namespace Library::Gui
         }
     }
 
+    void Layout::setParent(Layout* parent)
+    {
+        this->_parent = parent;
+    }
+
     Math::Rectangle Layout::rectangle()
     {
         Math::Rectangle parent;

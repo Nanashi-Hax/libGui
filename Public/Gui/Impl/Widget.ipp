@@ -13,7 +13,7 @@ namespace Library::Gui
 
         T* raw = child.get();
 
-        child->_layout = Layout(&_layout);
+        child->_layout.setParent(&layout);
 
         child->_node.parent = this;
         child->_node.index = _node.children.size();

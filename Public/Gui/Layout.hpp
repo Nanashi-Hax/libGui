@@ -46,6 +46,8 @@ namespace Library::Gui
         Layout();
         explicit Layout(Layout* parent);
 
+        void setParent(Layout* parent);
+
         Math::Rectangle rectangle();
 
         void setAlignment(HorizontalAlignment horizontal, VerticalAlignment vertical);
