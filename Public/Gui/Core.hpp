@@ -7,9 +7,6 @@ namespace Library::Gui
     class Core
     {
     public:
-        Core();
-        virtual ~Core() = default;
-
         void setRoot(Widget* widget);
 
         void render();
