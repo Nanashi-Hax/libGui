@@ -38,6 +38,9 @@ namespace Library::Gui
         virtual IClickable* clickable();
 
     protected:
+        Math::Rectangle rectangle();
+
+    private:
         Node<Widget> _node;
         Layout _layout;
     };
