@@ -9,6 +9,11 @@ namespace Library::Gui
         renderRecursive(_root);
     }
 
+    void RenderSystem::setRoot(Widget* widget)
+    {
+        _root = widget;
+    }
+
     void RenderSystem::renderRecursive(Widget* w)
     {
         if (auto r = w->renderable()) r->onRender();
