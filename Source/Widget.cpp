@@ -21,21 +21,6 @@ namespace Library::Gui
     {
         return _node.index;
     }
-    
-    Widget* Widget::addChild(std::unique_ptr<Widget> child)
-    {
-        if (!child || child->_node.parent) return nullptr;
-
-        Widget* raw = child.get();
-
-        child->_layout = Layout(&_layout);
-
-        child->_node.parent = this;
-        child->_node.index = _node.children.size();
-        _node.children.push_back(std::move(child));
-
-        return raw;
-    }
 
     void Widget::removeChild(size_t index)
     {
