@@ -17,42 +17,77 @@ namespace Library::Gui
 
     Math::Rectangle Layout::rectangle()
     {
-        Math::Rectangle r;
+        Math::Rectangle parent;
 
-        if(_parent)
+        if (_parent)
         {
-            r = _parent->rectangle();
+            parent = _parent->rectangle();
         }
         else
         {
-            r = Math::Rectangle{0,0,_sizeHint.preferredWidth,_sizeHint.preferredHeight};
+            parent =
+            {
+                0,
+                0,
+                _sizeHint.preferredWidth,
+                _sizeHint.preferredHeight
+            };
         }
 
-        r.x += _margin.left;
-        r.y += _margin.top;
-        r.width -= (_margin.left + _margin.right);
-        r.height -= (_margin.top + _margin.bottom);
+        float ax = parent.x + _margin.left;
+        float ay = parent.y + _margin.top;
 
-        float w = std::max(_sizeHint.minWidth, std::min(r.width, _sizeHint.preferredWidth));
-        float h = std::max(_sizeHint.minHeight, std::min(r.height, _sizeHint.preferredHeight));
-        r.width = w;
-        r.height = h;
+        float aw = parent.width  - (_margin.left + _margin.right);
+        float ah = parent.height - (_margin.top  + _margin.bottom);
 
-        switch(_hAlign)
+        float w = std::clamp
+        (
+            _sizeHint.preferredWidth,
+            _sizeHint.minWidth,
+            aw
+        );
+
+        float h = std::clamp
+        (
+            _sizeHint.preferredHeight,
+            _sizeHint.minHeight,
+            ah
+        );
+
+        float x = ax;
+        float y = ay;
+
+        switch (_hAlign)
         {
             case HorizontalAlignment::Left: break;
-            case HorizontalAlignment::Center: r.x += (r.width - w)/2; break;
-            case HorizontalAlignment::Right: r.x += (r.width - w); break;
+            case HorizontalAlignment::Center:
+            {
+                x += (aw - w) * 0.5f;
+                break;
+            }
+            case HorizontalAlignment::Right:
+            {
+                x += (aw - w);
+                break;
+            }
         }
 
-        switch(_vAlign)
+        switch (_vAlign)
         {
             case VerticalAlignment::Up: break;
-            case VerticalAlignment::Middle: r.y += (r.height - h)/2; break;
-            case VerticalAlignment::Down: r.y += (r.height - h); break;
+            case VerticalAlignment::Middle:
+            {
+                y += (ah - h) * 0.5f;
+                break;
+            }
+            case VerticalAlignment::Down:
+            {
+                y += (ah - h);
+                break;
+            }
         }
 
-        return r;
+        return { x, y, w, h };
     }
 
     void Layout::setAlignment(HorizontalAlignment horizontal, VerticalAlignment vertical)

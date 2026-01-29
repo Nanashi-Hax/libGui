@@ -25,9 +25,10 @@ namespace Library::Gui
     void FocusSystem::focusNext()
     {
         if(_focus == nullptr) return;
+        Widget* w;
         while (true)
         {
-            Widget* w = _focus->next();
+            w = _focus->next();
             IFocusable* f = dynamic_cast<IFocusable*>(w);
             if(f)
             {
@@ -41,9 +42,10 @@ namespace Library::Gui
     void FocusSystem::focusPrevious()
     {
         if(_focus == nullptr) return;
+        Widget* w;
         while (true)
         {
-            Widget* w = _focus->previous();
+            w = _focus->previous();
             IFocusable* f = dynamic_cast<IFocusable*>(w);
             if(f)
             {
