@@ -11,7 +11,7 @@ namespace Library::Gui
         if(parent)
         {
             Math::Rectangle rect = _parent->rectangle();
-            _sizeHint = SizeHint(16.0f, 16.0f, rect.width, rect.height);
+            _sizeHint = SizeHint(0.0f, 0.0f, rect.width, rect.height);
         }
     }
 

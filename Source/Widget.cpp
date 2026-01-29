@@ -1,70 +1,102 @@
-#include <memory>
-
 #include <Math.hpp>
 #include "Gui/Widget.hpp"
 
 namespace Library::Gui
 {
-    Widget::Widget() : node(this)
-    {
-        Widget* p = parent();
-        if(p)
-        {
-            layout = (p->layout);
-        }
-    }
+    Widget::Widget() {}
     
     Widget::~Widget() = default;
 
     Widget* Widget::parent() const noexcept
     {
-        if(Node<Widget>* p = node.parent())
-        {
-            return p->owner();
-        }
-        return nullptr;
+        return _node.parent;
+    }
+
+    const std::vector<std::unique_ptr<Widget>>& Widget::children() const noexcept
+    {
+        return _node.children;
+    }
+
+    std::optional<size_t> Widget::index() const noexcept
+    {
+        return _node.index;
     }
     
+    Widget* Widget::addChild(std::unique_ptr<Widget> child)
+    {
+        if (!child || child->_node.parent) return nullptr;
+
+        Widget* raw = child.get();
+
+        child->_layout = Layout(&_layout);
+
+        child->_node.parent = this;
+        child->_node.index = _node.children.size();
+        _node.children.push_back(std::move(child));
+
+        return raw;
+    }
+
     void Widget::removeChild(size_t index)
     {
-        node.removeChild(index);
+        if(_node.children.size() <= index) return;
+        
+        Widget* child = _node.children[index].get();
+        child->_node.parent = nullptr;
+
+        _node.children.erase(_node.children.begin() + index);
+
+        for (size_t i = index; i < _node.children.size(); ++i)
+        {
+            _node.children[i]->_node.index = i;
+        }
     }
 
-    Widget* Widget::previous() const noexcept
+    Widget* Widget::child(size_t index) noexcept
     {
-        if(Node<Widget>* n = node.previous())
-        {
-            return n->owner();
-        }
-        return nullptr;
+        if(_node.children.size() <= index) return nullptr;
+        return _node.children[index].get();
+    }
+    
+    Widget* Widget::previous() noexcept
+    {
+        if (!_node.parent) return nullptr;
+
+        std::optional<size_t> i = _node.index;
+        if(!i || i.value() == 0) return nullptr;
+        return _node.parent->child(i.value() - 1);
     }
 
-    Widget* Widget::next() const noexcept
+    Widget* Widget::next() noexcept
     {
-        if(Node<Widget>* n = node.next())
-        {
-            return n->owner();
-        }
-        return nullptr;
+        if (!_node.parent) return nullptr;
+
+        std::optional<size_t> i = index();
+        if(!i) return nullptr;
+        return _node.parent->child(i.value() + 1);
     }
 
     void Widget::setAlignment(HorizontalAlignment horizontal, VerticalAlignment vertical)
     {
-        layout.setAlignment(horizontal, vertical);
+        _layout.setAlignment(horizontal, vertical);
     }
 
     void Widget::setMinSize(float width, float height)
     {
-        layout.setMinSize(width, height);
+        _layout.setMinSize(width, height);
     }
 
     void Widget::setPreferredSize(float width, float height)
     {
-        layout.setPreferredSize(width, height);
+        _layout.setPreferredSize(width, height);
     }
 
     void Widget::setMargin(float left, float top, float right, float bottom)
     {
-        layout.setMargin(left, top, right, bottom);
+        _layout.setMargin(left, top, right, bottom);
     }
+
+    IRenderable* Widget::renderable() { return nullptr; }
+    IFocusable* Widget::focusable() { return nullptr; }
+    IClickable* Widget::clickable() { return nullptr; }
 }

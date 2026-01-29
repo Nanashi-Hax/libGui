@@ -8,17 +8,16 @@ namespace Library::Gui
     class RenderSystem
     {
     public:
-        void render(Widget* w);
+        void render(Widget* root);
     };
 
     class FocusSystem
     {
     public:
-        void focus(Widget* w);
+        void focus(Widget* target);
         void focusNext();
         void focusPrevious();
         
-        bool canFocus(Widget* w) const;
         Widget* current() const noexcept;
         void clear() noexcept;
 
@@ -29,6 +28,6 @@ namespace Library::Gui
     class ClickSystem
     {
     public:
-        void click(Widget* w);
+        void click(Widget* target);
     };
 }

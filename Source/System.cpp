@@ -1,4 +1,3 @@
-
 #include "Gui/System.hpp"
 #include "Gui/Interface.hpp"
 #include "Gui/Widget.hpp"
@@ -7,18 +6,17 @@ namespace Library::Gui
 {   
     void RenderSystem::render(Widget* w)
     {
-        if(IRenderable* r = dynamic_cast<IRenderable*>(w))
-        {
-            r->onRender();
-        }
+        if (auto r = w->renderable()) r->onRender();
+
+        for (auto& c : w->children()) render(c.get());
     }
 
-    void FocusSystem::focus(Widget* w)
+    void FocusSystem::focus(Widget* target)
     {
-        if(IFocusable* f = dynamic_cast<IFocusable*>(w))
+        if(IFocusable* f = target->focusable())
         {
             f->onFocus();
-            _focus = w;
+            _focus = target;
         }
     }
 
@@ -29,7 +27,7 @@ namespace Library::Gui
         while (true)
         {
             w = _focus->next();
-            IFocusable* f = dynamic_cast<IFocusable*>(w);
+            IFocusable* f = w->focusable();
             if(f)
             {
                 f->onFocus();
@@ -46,7 +44,7 @@ namespace Library::Gui
         while (true)
         {
             w = _focus->previous();
-            IFocusable* f = dynamic_cast<IFocusable*>(w);
+            IFocusable* f = w->focusable();
             if(f)
             {
                 f->onFocus();
@@ -54,11 +52,6 @@ namespace Library::Gui
                 break;
             }
         }
-    }
-    
-    bool FocusSystem::canFocus(Widget* w) const
-    {
-        return dynamic_cast<IFocusable*>(w);
     }
 
     Widget* FocusSystem::current() const noexcept
@@ -71,9 +64,9 @@ namespace Library::Gui
         _focus = nullptr;
     }
 
-    void ClickSystem::click(Widget* w)
+    void ClickSystem::click(Widget* target)
     {
-        if(IClickable* c = dynamic_cast<IClickable*>(w))
+        if(IClickable* c = target->clickable())
         {
             c->onClick();
         }
