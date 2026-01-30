@@ -13,8 +13,6 @@ namespace Library::Gui
 
         T* raw = child.get();
 
-        child->_layout.setParent(&layout);
-
         child->_node.parent = this;
         child->_node.index = _node.children.size();
         _node.children.push_back(std::move(child));
