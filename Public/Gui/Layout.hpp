@@ -44,9 +44,7 @@ namespace Library::Gui
     {
     public:
         Layout();
-        explicit Layout(Layout* parent);
-
-        void setParent(Layout* parent);
+        Layout(float width, float height);
 
         Math::Rectangle compute(const Math::Rectangle& parent);
         const Math::Rectangle& rectangle() const;
@@ -58,8 +56,6 @@ namespace Library::Gui
         void setOffset(float x, float y);
 
     private:
-        Layout* _parent;
-
         HorizontalAlignment _hAlign = HorizontalAlignment::Center;
         VerticalAlignment _vAlign = VerticalAlignment::Middle;
         SizeHint _sizeHint;

@@ -4,20 +4,11 @@
 
 namespace Library::Gui
 {
-    Layout::Layout() : _parent(nullptr) {}
+    Layout::Layout() {}
 
-    Layout::Layout(Layout* parent) : _parent(parent)
+    Layout::Layout(float width, float height)
     {
-        if(parent)
-        {
-            Math::Rectangle rect = _parent->rectangle();
-            _sizeHint = SizeHint(0.0f, 0.0f, rect.width, rect.height);
-        }
-    }
-
-    void Layout::setParent(Layout* parent)
-    {
-        this->_parent = parent;
+        setPreferredSize(width, height);
     }
 
     Math::Rectangle Layout::compute(const Math::Rectangle& parent)
