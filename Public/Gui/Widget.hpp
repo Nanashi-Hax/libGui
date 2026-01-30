@@ -45,6 +45,8 @@ namespace Library::Gui
         Widget* previous() noexcept;
         Widget* next() noexcept;
 
+        virtual void updateLayout(const Math::Rectangle& parent);
+
         void setAlignment(HorizontalAlignment horizontal, VerticalAlignment vertical);
         void setMinSize(float width, float height);
         void setPreferredSize(float width, float height);
@@ -56,6 +58,8 @@ namespace Library::Gui
 
     protected:
         Math::Rectangle rectangle();
+        Layout& layout();
+        const Layout& layout() const;
 
     private:
         Node<Widget> _node;

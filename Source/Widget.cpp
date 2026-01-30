@@ -61,6 +61,16 @@ namespace Library::Gui
         return _node.parent->child(i.value() + 1);
     }
 
+    void Widget::updateLayout(const Math::Rectangle& parent)
+    {
+        auto myRect = _layout.compute(parent);
+    
+        for (auto& c : children())
+        {
+            c->updateLayout(myRect);
+        }
+    }
+
     void Widget::setAlignment(HorizontalAlignment horizontal, VerticalAlignment vertical)
     {
         _layout.setAlignment(horizontal, vertical);
@@ -86,4 +96,14 @@ namespace Library::Gui
     IClickable* Widget::clickable() { return nullptr; }
 
     Math::Rectangle Widget::rectangle() { return _layout.rectangle(); }
+
+    Layout& Widget::layout()
+    {
+        return _layout;
+    }
+
+    const Layout& Widget::layout() const
+    {
+        return _layout;
+    }
 }

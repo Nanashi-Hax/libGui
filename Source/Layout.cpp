@@ -20,79 +20,58 @@ namespace Library::Gui
         this->_parent = parent;
     }
 
-    Math::Rectangle Layout::rectangle()
+    Math::Rectangle Layout::compute(const Math::Rectangle& parent)
     {
-        Math::Rectangle parent;
-
-        if (_parent)
-        {
-            parent = _parent->rectangle();
-        }
-        else
-        {
-            parent =
-            {
-                0,
-                0,
-                _sizeHint.preferredWidth,
-                _sizeHint.preferredHeight
-            };
-        }
-
         float ax = parent.x + _margin.left;
         float ay = parent.y + _margin.top;
 
         float aw = parent.width  - (_margin.left + _margin.right);
         float ah = parent.height - (_margin.top  + _margin.bottom);
 
-        float w = std::clamp
-        (
+        float w = std::clamp(
             _sizeHint.preferredWidth,
             _sizeHint.minWidth,
             aw
         );
 
-        float h = std::clamp
-        (
+        float h = std::clamp(
             _sizeHint.preferredHeight,
             _sizeHint.minHeight,
             ah
         );
 
-        float x = ax;
-        float y = ay;
+        float x = ax + _offset.x;
+        float y = ay + _offset.y;
 
         switch (_hAlign)
         {
-            case HorizontalAlignment::Left: break;
             case HorizontalAlignment::Center:
-            {
                 x += (aw - w) * 0.5f;
                 break;
-            }
             case HorizontalAlignment::Right:
-            {
                 x += (aw - w);
                 break;
-            }
+            default: break;
         }
 
         switch (_vAlign)
         {
-            case VerticalAlignment::Up: break;
             case VerticalAlignment::Middle:
-            {
                 y += (ah - h) * 0.5f;
                 break;
-            }
             case VerticalAlignment::Down:
-            {
                 y += (ah - h);
                 break;
-            }
+            default: break;
         }
 
-        return { x, y, w, h };
+        _rect = { x, y, w, h };
+        return _rect;
+    }
+
+    const Math::Rectangle& Layout::rectangle() const
+    {
+        return _rect;
     }
 
     void Layout::setAlignment(HorizontalAlignment horizontal, VerticalAlignment vertical)
@@ -119,5 +98,11 @@ namespace Library::Gui
         _margin.top = top;
         _margin.right = right;
         _margin.bottom = bottom;
+    }
+
+    void Layout::setOffset(float x, float y)
+    {
+        _offset.x = x;
+        _offset.y = y;
     }
 }

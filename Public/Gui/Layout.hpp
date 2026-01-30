@@ -48,12 +48,14 @@ namespace Library::Gui
 
         void setParent(Layout* parent);
 
-        Math::Rectangle rectangle();
+        Math::Rectangle compute(const Math::Rectangle& parent);
+        const Math::Rectangle& rectangle() const;
 
         void setAlignment(HorizontalAlignment horizontal, VerticalAlignment vertical);
         void setMinSize(float width, float height);
         void setPreferredSize(float width, float height);
         void setMargin(float left, float top, float right, float bottom);
+        void setOffset(float x, float y);
 
     private:
         Layout* _parent;
@@ -62,5 +64,8 @@ namespace Library::Gui
         VerticalAlignment _vAlign = VerticalAlignment::Middle;
         SizeHint _sizeHint;
         Margin _margin;
+        Math::Vector2 _offset;
+
+        Math::Rectangle _rect;
     };
 }
