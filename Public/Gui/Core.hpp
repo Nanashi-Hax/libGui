@@ -9,6 +9,7 @@ namespace Library::Gui
     public:
         void setRoot(Widget* widget);
 
+        void update();
         void render();
 
         void focusNext();

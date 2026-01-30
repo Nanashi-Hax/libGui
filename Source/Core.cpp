@@ -9,6 +9,11 @@ namespace Library::Gui
         _focus.focus(widget);
     }
 
+    void Core::update()
+    {
+        _render.update();
+    }
+
     void Core::render()
     {
         _render.render();
