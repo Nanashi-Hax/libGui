@@ -63,11 +63,11 @@ namespace Library::Gui
 
     void Widget::updateLayout(const Math::Rectangle& parent)
     {
-        auto myRect = _layout.compute(parent);
+        auto rect = _layout.compute(parent);
     
         for (auto& c : children())
         {
-            c->updateLayout(myRect);
+            c->updateLayout(rect);
         }
     }
 

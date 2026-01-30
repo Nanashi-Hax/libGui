@@ -7,6 +7,7 @@ namespace Library::Gui
     class RenderSystem
     {
     public:
+        void update();
         void render();
 
         void setRoot(Widget* root);

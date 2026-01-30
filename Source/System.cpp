@@ -3,6 +3,12 @@
 
 namespace Library::Gui
 {   
+    void RenderSystem::update()
+    {
+        if (!_root) return;
+        _root->updateLayout(_root->rectangle());
+    }
+
     void RenderSystem::render()
     {
         if (!_root) return;

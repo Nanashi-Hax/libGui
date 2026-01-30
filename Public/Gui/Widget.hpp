@@ -56,8 +56,9 @@ namespace Library::Gui
         virtual IFocusable* focusable();
         virtual IClickable* clickable();
 
-    protected:
         Math::Rectangle rectangle();
+        
+    protected:
         Layout& layout();
         const Layout& layout() const;
 
