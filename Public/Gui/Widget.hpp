@@ -21,12 +21,6 @@ namespace Library::Gui
         virtual void onFocus() = 0;
     };
 
-    class IClickable
-    {
-    public:
-        virtual void onClick() = 0;
-    };
-
     class IAnimatable
     {
     public:
@@ -60,7 +54,6 @@ namespace Library::Gui
 
         virtual IRenderable* renderable();
         virtual IFocusable* focusable();
-        virtual IClickable* clickable();
         virtual IAnimatable* animatable();
 
         Math::Rectangle rectangle();

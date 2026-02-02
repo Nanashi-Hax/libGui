@@ -18,7 +18,6 @@ namespace Library::Gui
     private:
         RenderSystem _render;
         FocusSystem _focus;
-        ClickSystem _click;
         AnimateSystem _animate;
     };
 }

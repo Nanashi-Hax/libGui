@@ -32,12 +32,6 @@ namespace Library::Gui
         Widget* _focus = nullptr;
     };
 
-    class ClickSystem
-    {
-    public:
-        void click(Widget* target);
-    };
-
     class AnimateSystem
     {
     public:

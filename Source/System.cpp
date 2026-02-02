@@ -80,14 +80,6 @@ namespace Library::Gui
         _focus = nullptr;
     }
 
-    void ClickSystem::click(Widget* target)
-    {
-        if(IClickable* c = target->clickable())
-        {
-            c->onClick();
-        }
-    }
-
     void AnimateSystem::animate(float deltaTime)
     {
         if (!_root) return;
