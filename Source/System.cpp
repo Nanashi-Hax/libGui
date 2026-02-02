@@ -1,12 +1,13 @@
 #include "Gui/System.hpp"
 #include "Gui/Widget.hpp"
+#include "Math.hpp"
 
 namespace Library::Gui
 {   
-    void RenderSystem::update()
+    void RenderSystem::update(float width, float height)
     {
         if (!_root) return;
-        _root->updateLayout(_root->rectangle());
+        _root->updateLayout(Math::Rectangle(0.0f, 0.0f, width, height));
     }
 
     void RenderSystem::render()
