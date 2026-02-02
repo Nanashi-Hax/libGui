@@ -7,10 +7,12 @@ namespace Library::Gui
     {
         _render.setRoot(widget);
         _focus.focus(widget);
+        _animate.setRoot(widget);
     }
 
-    void Core::update(float width, float height)
+    void Core::update(float width, float height, float deltaTime)
     {
+        _animate.animate(deltaTime);
         _render.update(width, height);
     }
 

@@ -87,4 +87,21 @@ namespace Library::Gui
             c->onClick();
         }
     }
+
+    void AnimateSystem::animate(float deltaTime)
+    {
+        if (!_root) return;
+        animateRecursive(_root, deltaTime);
+    }
+
+    void AnimateSystem::setRoot(Widget* widget)
+    {
+        _root = widget;
+    }
+
+    void AnimateSystem::animateRecursive(Widget* w, float deltaTime)
+    {
+        if (auto a = w->animatable()) a->onAnimate(deltaTime);
+        for (auto& c : w->children()) animateRecursive(c.get(), deltaTime);
+    }
 }

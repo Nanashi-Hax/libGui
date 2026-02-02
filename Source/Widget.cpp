@@ -94,6 +94,7 @@ namespace Library::Gui
     IRenderable* Widget::renderable() { return nullptr; }
     IFocusable* Widget::focusable() { return nullptr; }
     IClickable* Widget::clickable() { return nullptr; }
+    IAnimatable* Widget::animatable() { return nullptr; }
 
     Math::Rectangle Widget::rectangle() { return _layout.rectangle(); }
 

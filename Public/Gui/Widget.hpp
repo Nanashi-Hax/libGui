@@ -27,6 +27,12 @@ namespace Library::Gui
         virtual void onClick() = 0;
     };
 
+    class IAnimatable
+    {
+    public:
+        virtual void onAnimate(float deltaTime) = 0;
+    };
+
     class Widget
     {
     public:
@@ -55,6 +61,7 @@ namespace Library::Gui
         virtual IRenderable* renderable();
         virtual IFocusable* focusable();
         virtual IClickable* clickable();
+        virtual IAnimatable* animatable();
 
         Math::Rectangle rectangle();
         

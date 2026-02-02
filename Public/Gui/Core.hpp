@@ -9,7 +9,7 @@ namespace Library::Gui
     public:
         void setRoot(Widget* widget);
 
-        void update(float width, float height);
+        void update(float width, float height, float deltaTime);
         void render();
 
         void focusNext();
@@ -19,5 +19,6 @@ namespace Library::Gui
         RenderSystem _render;
         FocusSystem _focus;
         ClickSystem _click;
+        AnimateSystem _animate;
     };
 }

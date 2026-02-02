@@ -37,4 +37,17 @@ namespace Library::Gui
     public:
         void click(Widget* target);
     };
+
+    class AnimateSystem
+    {
+    public:
+        void animate(float deltaTime);
+
+        void setRoot(Widget* root);
+
+    private:
+        void animateRecursive(Widget* root, float deltaTime);
+
+        Widget* _root = nullptr;
+    };
 }
