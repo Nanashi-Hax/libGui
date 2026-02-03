@@ -68,8 +68,7 @@ namespace Library::Gui
         void setColor(Math::Color4f color);
         
     protected:
-        Layout& layout();
-        const Layout& layout() const;
+        Math::Rectangle computeLayout(Math::Rectangle parent);
 
     private:
         Node<Widget> _node;

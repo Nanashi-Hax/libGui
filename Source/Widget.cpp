@@ -81,30 +81,11 @@ namespace Library::Gui
         }
     }
 
-    void Widget::setAlignment(HorizontalAlignment horizontal, VerticalAlignment vertical)
-    {
-        _layout.setAlignment(horizontal, vertical);
-    }
-
-    void Widget::setMinSize(float width, float height)
-    {
-        _layout.setMinSize(width, height);
-    }
-
-    void Widget::setPreferredSize(float width, float height)
-    {
-        _layout.setPreferredSize(width, height);
-    }
-
-    void Widget::setMargin(float left, float top, float right, float bottom)
-    {
-        _layout.setMargin(left, top, right, bottom);
-    }
-
-    void Widget::setOffset(float x, float y)
-    {
-        _layout.setOffset(x, y);
-    }
+    void Widget::setAlignment(HorizontalAlignment horizontal, VerticalAlignment vertical) { _layout.setAlignment(horizontal, vertical); }
+    void Widget::setMinSize(float width, float height) { _layout.setMinSize(width, height); }
+    void Widget::setPreferredSize(float width, float height) { _layout.setPreferredSize(width, height); }
+    void Widget::setMargin(float left, float top, float right, float bottom) { _layout.setMargin(left, top, right, bottom); }
+    void Widget::setOffset(float x, float y) { _layout.setOffset(x, y); }
 
     IRenderable* Widget::renderable() { return nullptr; }
     IFocusable* Widget::focusable() { return nullptr; }
@@ -115,13 +96,5 @@ namespace Library::Gui
     Math::Color4f Widget::color() const { return _color.render(); }
     void Widget::setColor(Math::Color4f color) { _color.setLocal(color); }
 
-    Layout& Widget::layout()
-    {
-        return _layout;
-    }
-
-    const Layout& Widget::layout() const
-    {
-        return _layout;
-    }
+    Math::Rectangle Widget::computeLayout(Math::Rectangle parent) { return _layout.compute(parent); }
 }
