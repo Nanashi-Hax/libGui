@@ -8,6 +8,7 @@ namespace Library::Gui
     {
         if (!_root) return;
         _root->updateLayout(Math::Rectangle(0.0f, 0.0f, width, height));
+        _root->updateColor(Math::Color4f(1.0f, 1.0f, 1.0f, 1.0f));
     }
 
     void RenderSystem::render()

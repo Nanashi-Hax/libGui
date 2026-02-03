@@ -60,7 +60,7 @@ namespace Library::Gui
         VerticalAlignment _vAlign = VerticalAlignment::Middle;
         SizeHint _sizeHint;
         Margin _margin;
-        Math::Vector2 _offset;
+        Math::Vector2f _offset;
 
         Math::Rectangle _rect;
     };

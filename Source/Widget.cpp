@@ -71,6 +71,16 @@ namespace Library::Gui
         }
     }
 
+    void Widget::updateColor(Math::Color4f parent)
+    {
+        Math::Color4f renderColor = _color.compute(parent);
+
+        for (auto& c : children())
+        {
+            c->updateColor(renderColor);
+        }
+    }
+
     void Widget::setAlignment(HorizontalAlignment horizontal, VerticalAlignment vertical)
     {
         _layout.setAlignment(horizontal, vertical);
@@ -91,11 +101,19 @@ namespace Library::Gui
         _layout.setMargin(left, top, right, bottom);
     }
 
+    void Widget::setOffset(float x, float y)
+    {
+        _layout.setOffset(x, y);
+    }
+
     IRenderable* Widget::renderable() { return nullptr; }
     IFocusable* Widget::focusable() { return nullptr; }
     IAnimatable* Widget::animatable() { return nullptr; }
 
-    Math::Rectangle Widget::rectangle() { return _layout.rectangle(); }
+    Math::Rectangle Widget::rectangle() const { return _layout.rectangle(); }
+    
+    Math::Color4f Widget::color() const { return _color.render(); }
+    void Widget::setColor(Math::Color4f color) { _color.setLocal(color); }
 
     Layout& Widget::layout()
     {
