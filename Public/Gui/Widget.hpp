@@ -12,18 +12,21 @@ namespace Library::Gui
     class IRenderable
     {
     public:
+        virtual ~IRenderable() = default;
         virtual void onRender() = 0;
     };
 
     class IFocusable
     {
     public:
+        virtual ~IFocusable() = default;
         virtual void onFocus() = 0;
     };
 
     class IAnimatable
     {
     public:
+        virtual ~IAnimatable() = default;
         virtual void onAnimate(float deltaTime) = 0;
     };
 
