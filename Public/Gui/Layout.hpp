@@ -56,8 +56,8 @@ namespace Library::Gui
         void setOffset(float x, float y);
 
     private:
-        HorizontalAlignment _hAlign = HorizontalAlignment::Center;
-        VerticalAlignment _vAlign = VerticalAlignment::Middle;
+        HorizontalAlignment _hAlign = HorizontalAlignment::Left;
+        VerticalAlignment _vAlign = VerticalAlignment::Up;
         SizeHint _sizeHint;
         Margin _margin;
         Math::Vector2f _offset;
