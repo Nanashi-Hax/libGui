@@ -34,13 +34,14 @@ namespace Library::Gui
 
     struct Margin
     {
+        Margin() : left(0), top(0), right(0), bottom(0) {}
         Margin(float m) : left(m), top(m), right(m), bottom(m) {}
         Margin(float x, float y) : left(x), top(y), right(x), bottom(y) {}
         Margin(float left, float top, float right, float bottom) : left(left), top(top), right(right), bottom(bottom) {}
-        float left = 0;
-        float top = 0;
-        float right = 0;
-        float bottom = 0;
+        float left;
+        float top;
+        float right;
+        float bottom;
     };
 
     class Layout
